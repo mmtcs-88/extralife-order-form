@@ -1417,14 +1417,7 @@ input.invalid, select.invalid, textarea.invalid {
     if (SCRIPT_URL && SCRIPT_URL !== 'PASTE_YOUR_APPS_SCRIPT_URL_HERE') {
       const payload = JSON.stringify(order);
 
-      // Primary: fetch with no-cors (fire and forget)
-      try {
-        const formData = new FormData();
-        formData.append('data', payload);
-        fetch(SCRIPT_URL, { method: 'POST', body: formData, mode: 'no-cors' }).catch(() => {});
-      } catch(_) {}
-
-      // Fallback: GET request with data in URL param
+      // Send via GET request with data in URL param
       try {
         const url = SCRIPT_URL + '?data=' + encodeURIComponent(payload);
         fetch(url, { mode: 'no-cors' }).catch(() => {});
